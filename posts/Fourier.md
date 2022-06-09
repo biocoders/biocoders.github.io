@@ -6,7 +6,7 @@ There are many mathematical tools used in many aspects of science. Fourier Trans
 In short, Fourier Transformation allows transforming a function from a time domain to a frequency domain. What does that mean? Let’s say you have data with different values across time. The x-axis is time, and the y-axis is your variable. By FT, you can convert this function to a summation of different sinusoidal waves with different frequencies, amplitudes, and starting points. If you have a complex signal for 1000 ms, for example, with one data point for each ms, FT will convert this function summation to 1000 wave functions. There are many formulas for FT; here, I will show the simplest one:
 
 
-$F_n=\sum_{t=1}^Tx_t*e^{-i2πnt/T} $
+$F_n = \Sigma_{t=1}^T x_t*e^{-i2πnt/T} $
 
 
 Here xt is the value of our signal at time t. Every data point will contribute to the frequency n as in the above formula. We got a value for each frequency. What is this value? If you notice, it includes an e to the power of an imaginary number. This notation is used to be able to wrap both the amplitude and the phase delay within the same expression. Because using Euler’s formula, it is possible to write an exponential expression as a summation of cos and sin, as shown in the below figure. So, the cos2 + sin2 will give the amplitude of the wave, and the angle will dictate when the wave starts (as not all of them will start at 0). The amplitude and starting points of every frequency will be calculated with this formula.
@@ -18,14 +18,14 @@ By Original: GuntherDerivative work: Wereon - This file was derived from Euler�
 There are many neat properties of FT. The very first one is that every continuous signal can be expressed as a series of frequencies by the above formula. Furthermore, the result is unique, and it is possible to regenerate the time series back by using the FT.
 
 
-$x_t=1/T \sum_{n=1}^T F_n*e^{-i2πnt/T}$
+$x_t = 1/T \Sigma_{n=1}^T F_n*e^{-i2πnt/T}$
 
 
 OK, so we converted our signal to a series of sinusoidal waves. We had 1000 data points before, and now we have 1000 sin waves. What is the point? FT by itself is not a simplification method. Nevertheless, it can be used for simplification.
 
 
 Let’s say my signal is a very simple sinusoidal wave with noise, and I want to get rid of the noise. Below is a snippet of Python code to generate such a signal using the NumPy package.
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 import random as rnd
@@ -36,7 +36,7 @@ plt.plot(sinWave, lw=1)
 
 I use the Fast Fourier Transform (FFT – an algorithm that uses FT) of this signal, and below are the plots of the real and imaginary parts of the results, which can be used to create the waves.
 
-```
+```python
 transformed = fft.fft(sinWave)
 plt.plot(transformed.imag)
 plt.show()
